@@ -38,16 +38,8 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
 
     if(!url){
       res.sendStatus(400).send(`image url is required`);
-    } else {
-      filterImageFromURL(url).then((response) => {
-        res.send(response);
-        res.on('finish', function() {
-          deleteLocalFiles([response]);
-        })
-      });
-
-    }
-
+    } 
+      
     try{
       const filterPath = await filterImageFromURL(url);
       res.sendFile(filterPath, () => deleteLocalFiles([filterPath]));
